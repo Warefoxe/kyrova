@@ -1,0 +1,20 @@
+#!/bin/bash
+net="10.7.180."
+oldstate="old.txt"
+
+[ -s $oldstate ] || for (( i=0; i<255; i++ )); do echo 2; done >> $oldstate
+
+state=( $($oldstate) )
+
+for i in {100..105}
+do 
+ ip="$net$i"
+ ping -c1 $ip &>>/dev/null
+ res=$?
+
+ [ res -ne ${state[$1]} ] echo "$ip $res"
+ state[$i]=$res
+ # && echo "$ip 0" || echo "$ip -1"
+done 
+
+# state -> $oldstate
