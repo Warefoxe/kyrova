@@ -1,5 +1,6 @@
-net="10.7.180."
+#[ -s $res ] && cat $res -s “IP changes” root
 
+net="10.7.180."
 priv="old.txt"
 
 [ -s $priv ] || for (( i=0; i<255; i++ )); do echo 2; done >> $priv
